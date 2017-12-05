@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Made with Thimble</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Welcome to Thimble</h1>
+    <form id="formulaire">
+      <input id="palindromeInput" type="text" value=""/>
+      <input id="submitPalindrome" type='submit' name="" value="Check Palindrome" />
+      <br>
+      <input id="AnagramInput1" type="text" value=""/>
+      <input id="AnagramInput2" type="text" value=""/>
+      <input id="submitAnagram" type='submit' name="" value="Check Anagram" />
+    </form>
+
+    <script>
+      var palindromeInput = document.getElementById('palindromeInput');
+      var AnagramInput1 = document.getElementById('AnagramInput1');
+      var AnagramInput2 = document.getElementById('AnagramInput2');
+      var child = document.createElement('li');
+      var form = document.querySelector('form');
+      var checkPalindromeBtn = document.getElementById('submitPalindrome');
+      var checkAnagramBtn = document.getElementById('submitAnagram');
+      var ul = document.createElement('ul');
+      form.appendChild(ul);
+
+
+      function isPalindrome(input){
+        var reverseString = input.split('').reverse().join('');
+        if(input == reverseString){
+          return true;
+
+        } else {
+          return false;
+        }
+      }
+
+      function isAnagram(word1, word2){
+
+        if(!word1 || !word2 || word1.length !== word2.length){
+          return false;
+        } else {
+          var lowerWord1 = word1.toLowerCase();
+          var lowerWord2 = word2.toLowerCase();
+
+          if(lowerWord1 === lowerWord2){
+            return false;
+          }
+          var sortLowerWord1 = lowerWord1.split('').sort().join('');
+          var sortLowerWord2 = lowerWord2.split('').sort().join('');
+
+          if(sortLowerWord1 === sortLowerWord2)
+          {
+            return true;
+          }
+          else
+          {return false;}
+
+        }
+      }
+
+
+      checkPalindromeBtn.addEventListener('click', function(){
+
+        if (!isPalindrome(palindromeInput.value))
+        {
+          alert("Not a Palindrome")
+        }
+        else
+        {
+          var li = document.createElement('li');
+          li.textContent = palindromeInput.value + " : palindrome OK!";
+          ul.appendChild(li);
+        }
+
+        event.preventDefault();
+      });
+
+
+      checkAnagramBtn.addEventListener('click', function(){
+
+        if (!isAnagram(AnagramInput1.value, AnagramInput2.value))
+        {
+          alert("Not a Anagram")
+        }
+        else
+        {
+          var li = document.createElement('li');
+          li.textContent = AnagramInput1.value + " & " + AnagramInput2.value + " : Anagram OK!";
+          ul.appendChild(li);
+        }
+
+        event.preventDefault();
+      });
+
+    </script>
+
+
+
+
+  </body>
+</html>
